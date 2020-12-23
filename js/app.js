@@ -42,19 +42,19 @@ marca.addEventListener('change', (e) => { //evento que se dispara cuando ocurre 
 });
 
 year.addEventListener('change', (e) => {
-	datosBusqueda.year = e.target.value;
+	datosBusqueda.year = parseInt(e.target.value);
 });
 
 minimo.addEventListener('change', (e) => {
-	datosBusqueda.minimo = e.target.value;
+	datosBusqueda.minimo = parseInt(e.target.value);
 });
 
 maximo.addEventListener('change', (e) => {
-	datosBusqueda.maximo = e.target.value;
+	datosBusqueda.maximo = parseInt(e.target.value);
 });
 
 puertas.addEventListener('change', (e) => {
-	datosBusqueda.puertas = e.target.value;
+	datosBusqueda.puertas = parseInt(e.target.value);
 });
 
 transmision.addEventListener('change', (e) => {
@@ -99,16 +99,29 @@ function llenarSelect() {
 //	esta función se considera de alto nivel, ya que tiene 
 //	como parametro otra función
 function filtrarAuto() {
-	const resultado = autos.filter(filtrarMarca);
+	const resultado = autos.filter(filtrarMarca).filter(filtrarYear);
 
 	console.log(resultado);
 }
 
+//Función que devuelve el auto buscado por el usuario en base a la marca
 function filtrarMarca(auto) {
 	const { marca } = datosBusqueda;
 
 	if (marca) {
 		return auto.marca === marca;
 	}
+	
 	return auto;
+}
+
+//Función que devuelve el auto buscado por el usuario en base al año
+function filtrarYear(auto) {
+	const { year } = datosBusqueda;
+
+	if (year) {
+		return auto.year === year;
+	}
+
+	return auto
 }
