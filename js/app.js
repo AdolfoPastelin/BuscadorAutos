@@ -37,40 +37,42 @@ document.addEventListener('DOMContentLoaded', () => {
 //Event listeners para los select de búsqueda
 marca.addEventListener('change', (e) => { //evento que se dispara cuando ocurre un cambio en el atributo
 	datosBusqueda.marca = e.target.value;
-}); 
+
+	filtrarAuto();
+});
 
 year.addEventListener('change', (e) => {
 	datosBusqueda.year = e.target.value;
-}); 
+});
 
 minimo.addEventListener('change', (e) => {
 	datosBusqueda.minimo = e.target.value;
-}); 
+});
 
 maximo.addEventListener('change', (e) => {
 	datosBusqueda.maximo = e.target.value;
-}); 
+});
 
 puertas.addEventListener('change', (e) => {
 	datosBusqueda.puertas = e.target.value;
-}); 
+});
 
 transmision.addEventListener('change', (e) => {
 	datosBusqueda.transmision = e.target.value;
-}); 
+});
 
 color.addEventListener('change', (e) => {
 	datosBusqueda.color = e.target.value;
 	console.log(datosBusqueda);
-}); 
+});
 
 // Funciones //
 //Esta función mostrará los autos que se tendrán en una DB
 //En este caso no tenemos una base de datos pero usaremos un objeto en JS
 function mostrarAutos() {
-	autos.forEach( (auto) => {
-		
-		const {marca, modelo, year, precio, puertas, color, transmision} = auto;
+	autos.forEach((auto) => {
+
+		const { marca, modelo, year, precio, puertas, color, transmision } = auto;
 		const autoHTML = document.createElement('p');
 
 		autoHTML.textContent = `${marca} ${modelo} - ${year} - ${puertas} Puertas
@@ -85,10 +87,28 @@ function mostrarAutos() {
 
 //Generar los siguientes años del select
 function llenarSelect() {
-	for(let i = max; i >= min; i--){
+	for (let i = max; i >= min; i--) {
 		const opcion = document.createElement('option');
 		opcion.value = i;
 		opcion.textContent = i;
 		year.appendChild(opcion); //Agrega las opciones de año al select.
 	}
+}
+
+//Función que filtra en base a la busqueda//
+//	esta función se considera de alto nivel, ya que tiene 
+//	como parametro otra función
+function filtrarAuto() {
+	const resultado = autos.filter(filtrarMarca);
+
+	console.log(resultado);
+}
+
+function filtrarMarca(auto) {
+	const { marca } = datosBusqueda;
+
+	if (marca) {
+		return auto.marca === marca;
+	}
+	return auto;
 }
