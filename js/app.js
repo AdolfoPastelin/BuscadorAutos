@@ -1,10 +1,29 @@
 // Variables //
-const resultado = document.querySelector('#resultado');
+const marca = document.querySelector('#marca');
 const year = document.querySelector('#year');
+const minimo = document.querySelector('#minimo');
+const maximo = document.querySelector('#maximo');
+const puertas = document.querySelector('#puertas');
+const transmision = document.querySelector('#transmision');
+const color = document.querySelector('#color');
+
+//variable contenedora de los resultados
+const resultado = document.querySelector('#resultado');
 
 //obtiene el año actual (2020) y el minimo año para ventas (2010)
 const max = new Date().getFullYear(); //al pasar de año, se cambiará automaticamente.
 const min = max - 10;
+
+//Generar un objeto en la busqueda
+const datosBusqueda = { //objeto datosBusqueda
+	marca: '',
+	year: '',
+	minimo: '',
+	maximo: '',
+	puertas: '',
+	transmision: '',
+	color: '',
+}
 
 // eventos //
 document.addEventListener('DOMContentLoaded', () => {
@@ -15,6 +34,35 @@ document.addEventListener('DOMContentLoaded', () => {
 	llenarSelect();
 });
 
+//Event listeners para los select de búsqueda
+marca.addEventListener('change', (e) => { //evento que se dispara cuando ocurre un cambio en el atributo
+	datosBusqueda.marca = e.target.value;
+}); 
+
+year.addEventListener('change', (e) => {
+	datosBusqueda.year = e.target.value;
+}); 
+
+minimo.addEventListener('change', (e) => {
+	datosBusqueda.minimo = e.target.value;
+}); 
+
+maximo.addEventListener('change', (e) => {
+	datosBusqueda.maximo = e.target.value;
+}); 
+
+puertas.addEventListener('change', (e) => {
+	datosBusqueda.puertas = e.target.value;
+}); 
+
+transmision.addEventListener('change', (e) => {
+	datosBusqueda.transmision = e.target.value;
+}); 
+
+color.addEventListener('change', (e) => {
+	datosBusqueda.color = e.target.value;
+	console.log(datosBusqueda);
+}); 
 
 // Funciones //
 //Esta función mostrará los autos que se tendrán en una DB
@@ -38,8 +86,6 @@ function mostrarAutos() {
 //Generar los siguientes años del select
 function llenarSelect() {
 	for(let i = max; i >= min; i--){
-		console.log(i);
-
 		const opcion = document.createElement('option');
 		opcion.value = i;
 		opcion.textContent = i;
