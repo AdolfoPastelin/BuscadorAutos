@@ -120,8 +120,21 @@ function filtrarAuto() {
 		filtrarMinimo).filter(filtrarMaximo).filter(filtrarPuertas).filter(filtrarTransmision).filter(
 			filtrarColor);
 
-	mostrarAutos(resultado);
-	/* console.log(resultado); */
+	if (resultado.length) {
+		mostrarAutos(resultado);
+	} else {
+		noResultado();
+	}
+	
+}
+
+function noResultado() {
+	limpiarHTML();
+
+	const noResultado = document.createElement('div');
+	noResultado.classList.add('alerta', 'error');
+	noResultado.textContent = 'No hay resultados con los filtros que has ingresado.';
+	resultado.appendChild(noResultado)
 }
 
 //Función que devuelve el auto buscado por el usuario en base a la marca
