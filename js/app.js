@@ -116,9 +116,9 @@ function llenarSelect() {
 //	esta función se considera de alto nivel, ya que tiene 
 //	como parametro otra función
 function filtrarAuto() {
-	const resultado = autos.filter(filtrarMarca).filter(filtrarYear)
-		.filter(filtrarMinimo).filter(filtrarMaximo).filter(filtrarPuertas).filter(filtrarTransmision)
-		.filter(filtrarColor);
+	const resultado = autos.filter(filtrarMarca).filter(filtrarYear).filter(
+		filtrarMinimo).filter(filtrarMaximo).filter(filtrarPuertas).filter(filtrarTransmision).filter(
+			filtrarColor);
 
 	mostrarAutos(resultado);
 	/* console.log(resultado); */
